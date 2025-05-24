@@ -123,5 +123,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Performance Test Reports
-          path: /performance-test/vegeta/reports
+          path: /performance-test/vegeta/reports/
           
