@@ -35,8 +35,16 @@ func TestProductEndpointPerformance(t *testing.T) {
 	}
 	metrics.Close()
 
+	reportsDir := "reports"
+
+	if err := os.MkdirAll(reportsDir, os.ModePerm); err != nil {
+		t.Fatalf("failed to create reports directory: %v", err)
+	}
+
+	reportFile := "vegeta-" + endpoint + "-report"
+
 	// Reporte en formato texto
-	textFile, err := os.Create("vegeta-" + endpoint + "-report.txt")
+	textFile, err := os.Create(reportsDir + "/" + reportFile + ".txt")
 	if err != nil {
 		t.Fatalf("failed to create text report file: %v", err)
 	}
@@ -48,7 +56,7 @@ func TestProductEndpointPerformance(t *testing.T) {
 	}
 
 	// Reporte en formato JSON
-	jsonFile, err := os.Create("vegeta-" + endpoint + "-report.json")
+	jsonFile, err := os.Create(reportsDir + "/" + reportFile + ".json")
 	if err != nil {
 		t.Fatalf("failed to create JSON report file: %v", err)
 	}

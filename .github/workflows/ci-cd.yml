@@ -72,3 +72,36 @@ jobs:
           path: deploy.json
       - name: Sleep By Two Minutes
         run: sleep 120
+  acceptance-test:
+    needs: [ deploy ]
+    runs-on: ubuntu-latest
+    env:
+      API_HOST: "https://go-gin-obto.onrender.com/api"
+    container:
+      image: golang:1.23
+    steps:
+      - name: Download Go Modules
+        run: go mod download
+      - name: Run Acceptance Tests
+        run: go test ./acceptance-test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Acceptance Test Report
+          path: acceptance-test/godog-report.json
+  performance-test-vegeta:
+    needs: [ acceptance-test]
+    runs-on: ubuntu-latest
+    env:
+      API_HOST: "https://go-gin-obto.onrender.com/api"
+    container:
+      image: golang:1.23
+    steps:
+      - name: Download Go Modules
+        run: go mod download
+      - name: Run Performance Tests With Vegeta
+        run: go test -v ./performance-test/vegeta
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Performance Test Reports
+          path: /performance-test/vegeta/reports
+          

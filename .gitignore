@@ -11,5 +11,4 @@ coverage.html
 # Vegeta Reports
 /performance-test/vegeta/vegeta-report.json
 /performance-test/vegeta/vegeta-report.txt
-/performance-test/vegeta/vegeta-*-report.json
-/performance-test/vegeta/vegeta-*-report.txt
+/performance-test/vegeta/reports
