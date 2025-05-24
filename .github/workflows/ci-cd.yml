@@ -8,9 +8,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: go:1.24.1
+      image: go:1.24
     steps:
       - uses: actions/checkout@v4
+      - name: Cache Go Modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/go-build
+            /go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Download Go Modules
         run: go mod download
       - name: Build Go Project
@@ -19,9 +28,18 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     container:
-      image: go:1.24.1
+      image: go:1.24
     steps:
       - uses: actions/checkout@v4
+      - name: Cache Go Modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/go-build
+            /go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Download Go Modules
         run: go mod download
       - name: Build Go Project
