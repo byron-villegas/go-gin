@@ -1,0 +1,15 @@
+# Env File
+.env
+
+# Coverage Report
+coverage.out
+coverage.html
+
+# Godog Report
+/acceptance-test/godog-report.json
+
+# Vegeta Reports
+/performance-test/vegeta/vegeta-report.json
+/performance-test/vegeta/vegeta-report.txt
+/performance-test/vegeta/vegeta-*-report.json
+/performance-test/vegeta/vegeta-*-report.txt

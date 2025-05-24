@@ -1,0 +1,14 @@
+   ____  ___     ____ ___ _   _ 
+  / ___|/ _ \   / ___|_ _| \ | |
+ | |  _| | | | | |  _ | ||  \| |
+ | |_| | |_| | | |_| || || |\  |
+  \____|\___/   \____|___|_| \_|
+                                  
+----------------------------------
+MS: package.name
+MS VERSION: package.version
+GO VERSION: go.version
+GIN: gin.version
+CONTEXT PATH: server.path
+PORT: server.port
+----------------------------------
