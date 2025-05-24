@@ -1,0 +1,56 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: go:1.24.1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Go Modules
+        run: go mod download
+      - name: Build Go Project
+        run: go build -o main .
+  unit-test:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    container:
+      image: node:18.17.0
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Go Modules
+        run: go mod download
+      - name: Build Go Project
+        run: go build -o main .
+      - name: Run Tests With Coverage
+        run: go test -coverprofile="coverage.out" ./repository ./service ./controller ./routes ./config
+      - name: Generate Coverage Report
+        run: go tool cover -func="coverage.out"
+      - name: Generate HTML Coverage Report
+        run: go tool cover -html="coverage.out" -o coverage.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Coverage Report 
+          path: coverage.out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HTML Coverage Report
+          path: coverage.html
+  deploy:
+    needs: [ build, unit-test ]
+    runs-on: ubuntu-latest
+    env:
+      RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+    steps:
+      - name: Deploy With Hook
+        run: curl -X POST $RENDER_DEPLOY_HOOK > deploy.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deploy
+          path: deploy.json
+      - name: Sleep By Two Minutes
+        run: sleep 120
