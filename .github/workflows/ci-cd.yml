@@ -43,7 +43,7 @@ jobs:
       - name: Download Go Modules
         run: go mod download
       - name: Build Go Project
-        run: go build -o main .
+        run: go build -buildvcs=false -o main .
       - name: Run Tests With Coverage
         run: go test -coverprofile="coverage.out" ./repository ./service ./controller ./routes ./config
       - name: Generate Coverage Report
