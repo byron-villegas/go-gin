@@ -19,7 +19,7 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     container:
-      image: node:18.17.0
+      image: go:1.24.1
     steps:
       - uses: actions/checkout@v4
       - name: Download Go Modules
