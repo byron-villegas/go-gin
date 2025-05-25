@@ -58,4 +58,27 @@ paths:
       summary: Get all products
       tags:
       - Product
+  /products/{sku}:
+    get:
+      consumes:
+      - application/json
+      description: Get product by SKU
+      parameters:
+      - description: SKU
+        in: path
+        name: sku
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "404":
+          description: Not Found
+      summary: Get product by SKU
+      tags:
+      - Product
 swagger: "2.0"

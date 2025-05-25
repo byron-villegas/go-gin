@@ -33,7 +33,8 @@ func (ec *ProductController) GetProducts(c *gin.Context) {
 // @Produce json
 // @Param sku path string true "SKU"
 // @Success 200 {object} models.Product
-// @Failure 404 not found
+// @Failure 404
+// @Router /products/{sku} [get]
 func (ec *ProductController) GetProductBySku(c *gin.Context) {
 	sku := c.Param("sku")
 	product := productService.GetProductBySku(sku)
