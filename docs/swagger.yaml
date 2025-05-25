@@ -1,0 +1,61 @@
+basePath: /api
+definitions:
+  models.Characteristic:
+    properties:
+      titulo:
+        type: string
+      valor:
+        type: string
+    type: object
+  models.Product:
+    properties:
+      caracteristicas:
+        items:
+          $ref: '#/definitions/models.Characteristic'
+        type: array
+      descripcion:
+        type: string
+      id:
+        type: integer
+      imagen:
+        type: string
+      marca:
+        type: string
+      nombre:
+        type: string
+      precio:
+        type: integer
+      sku:
+        type: integer
+    type: object
+info:
+  contact:
+    email: byronvillegasm@gmail.com
+    name: Byron Villegas Moya
+    url: https://github.com/byron-villegas
+  description: Proyecto base para aplicaciones Gin con ejemplos de configuración,
+    testing y buenas prácticas.
+  license:
+    name: MIT
+    url: https://github.com/byron-villegas/go-gin/blob/main/LICENSE
+  title: Go Gin
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Get all products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+      summary: Get all products
+      tags:
+      - Product
+swagger: "2.0"

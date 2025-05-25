@@ -1,0 +1,91 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Proyecto base para aplicaciones Gin con ejemplos de configuración, testing y buenas prácticas.",
+        "title": "Go Gin",
+        "contact": {
+            "name": "Byron Villegas Moya",
+            "url": "https://github.com/byron-villegas",
+            "email": "byronvillegasm@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/byron-villegas/go-gin/blob/main/LICENSE"
+        },
+        "version": "1.0.0"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/products": {
+            "get": {
+                "description": "Get all products",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get all products",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Product"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Characteristic": {
+            "type": "object",
+            "properties": {
+                "titulo": {
+                    "type": "string"
+                },
+                "valor": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Product": {
+            "type": "object",
+            "properties": {
+                "caracteristicas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Characteristic"
+                    }
+                },
+                "descripcion": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "imagen": {
+                    "type": "string"
+                },
+                "marca": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "precio": {
+                    "type": "integer"
+                },
+                "sku": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
