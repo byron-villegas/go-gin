@@ -18,7 +18,6 @@ type Config struct {
 	JWTSecretKey      string
 	JWTAccessTokenExp int
 	CORSOrigin        string
-	CORSHeaders       string
 }
 
 var AppConfig *Config
@@ -30,6 +29,12 @@ func init() {
 		log.Printf("Warning: .env file not found, using default or system environment variables")
 	}
 
+	var corsOrigin string = "*"
+
+	if os.Getenv("CORS_ORIGIN") != "" {
+		corsOrigin = os.Getenv("CORS_ORIGIN")
+	}
+
 	// Initialize the AppConfig struct
 	AppConfig = &Config{
 		ServerPath:        "/api",
@@ -37,8 +42,7 @@ func init() {
 		SecretKey:         os.Getenv("SECRET_KEY"),
 		JWTSecretKey:      os.Getenv("JWT_SECRET_KEY"),
 		JWTAccessTokenExp: 3600,
-		CORSOrigin:        os.Getenv("CORS_ORIGIN"),
-		CORSHeaders:       "Content-Type",
+		CORSOrigin:        corsOrigin,
 	}
 }
 

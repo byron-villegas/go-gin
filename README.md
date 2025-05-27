@@ -5,6 +5,7 @@ Proyecto base para aplicaciones Gin con ejemplos de configuración, testing y bu
 ## Tabla de Contenidos
 
 - [Instalación](#instalación)
+- [Variables de Entorno](#variables-de-entorno)
 - [Ejecutar Aplicación](#ejecutar-aplicación)
 - [Testing](#testing)
 - [Tests de Aceptación](#tests-de-aceptación)
@@ -22,6 +23,18 @@ Para instalar los paquetes debemos ejecutar el siguiente comando
 ```shell
 go mod tidy
 ```
+
+## Variables de Entorno
+Este proyecto utiliza dotenv por lo que podemos crear el archivo **.env** con las siguientes variables
+
+```text
+SECRET_KEY=sdadasffadf
+JWT_SECRET_KEY=dsaadfdass
+CORS_ORIGIN=*
+```
+
+Estas variables son las llaves secretas que se obtienen por variable de entorno, tambien tenemos el cors origin por si queremos dejarlo especifico para un dominio en particular
+
 
 ## Ejecutar Aplicación
 Se debe ejecutar el siguiente comando

@@ -35,11 +35,8 @@ func TestInit_AppConfigDefaults(t *testing.T) {
 	if AppConfig.JWTAccessTokenExp != 3600 {
 		t.Errorf("expected JWTAccessTokenExp 3600, got %d", AppConfig.JWTAccessTokenExp)
 	}
-	if AppConfig.CORSOrigin != "" {
-		t.Errorf("expected CORSOrigin '', got '%s'", AppConfig.CORSOrigin)
-	}
-	if AppConfig.CORSHeaders != "Content-Type" {
-		t.Errorf("expected CORSHeaders 'Content-Type', got '%s'", AppConfig.CORSHeaders)
+	if AppConfig.CORSOrigin != "*" {
+		t.Errorf("expected CORSOrigin '*', got '%s'", AppConfig.CORSOrigin)
 	}
 }
 
@@ -56,7 +53,6 @@ func TestInit_AppConfigWithEnv(t *testing.T) {
 		JWTSecretKey:      os.Getenv("JWT_SECRET_KEY"),
 		JWTAccessTokenExp: 3600,
 		CORSOrigin:        os.Getenv("CORS_ORIGIN"),
-		CORSHeaders:       "Content-Type",
 	}
 
 	if AppConfig.SecretKey != "mysecret" {
