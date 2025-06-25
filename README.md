@@ -43,6 +43,23 @@ Se debe ejecutar el siguiente comando
 go run main.go
 ```
 
+### Docker
+A continuacion dejo los comandos a utilizar para generar la imagen y posteriormente ejecutarla
+
+#### Imagen
+Para generar la imagen debemos utilizar el siguiente comando
+
+```shell
+docker build -t go-gin .
+```
+
+#### Ejecutar
+Para ejecutar la imagen debemos utilizar el siguiente comando
+
+```shell
+docker run -p 8080:8080 go-gin
+```
+
 ## Testing
 
 ### Ejecutar
