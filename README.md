@@ -66,21 +66,21 @@ docker run -p 8080:8080 go-gin
 Se debe ejecutar el siguiente comando
 
 ```shell
-go test ./repository ./service ./controller ./routes ./config
+go test ./repository ./client ./service ./controller ./routes ./config
 ```
 
 ### Ejecutar con Cobertura
 Se debe ejecutar el siguiente comando
 
 ```shell
-go test -cover ./repository ./service ./controller ./routes ./config
+go test -cover ./repository ./client ./service ./controller ./routes ./config
 ```
 
 ### Generar Reporte Cobertura Formato Consola
 Se deben ejecutar los siguientes comandos
 
 ```shell
-go test -coverprofile="coverage.out" ./repository ./service ./controller ./routes ./config
+go test -coverprofile="coverage.out" ./repository ./client ./service ./controller ./routes ./config
 go tool cover -func="coverage.out"
 ```
 
@@ -88,7 +88,7 @@ go tool cover -func="coverage.out"
 Se deben ejecutar los siguientes comandos
 
 ```shell
-go test -coverprofile="coverage.out" ./repository ./service ./controller ./routes ./config
+go test -coverprofile="coverage.out" ./repository ./client ./service ./controller ./routes ./config
 go tool cover -html="coverage.out" -o coverage.html
 ```
 
