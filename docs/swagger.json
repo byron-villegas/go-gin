@@ -76,9 +76,61 @@
                     }
                 }
             }
+        },
+        "/starwars/people": {
+            "get": {
+                "description": "Get all people from Star Wars API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "StarWars"
+                ],
+                "summary": "Get all people",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.PeopleDto"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "dto.PeopleDto": {
+            "type": "object",
+            "properties": {
+                "birth_year": {
+                    "type": "string"
+                },
+                "eye_color": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "hair_color": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                },
+                "mass": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "skin_color": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Characteristic": {
             "type": "object",
             "properties": {

@@ -1,5 +1,24 @@
 basePath: /api
 definitions:
+  dto.PeopleDto:
+    properties:
+      birth_year:
+        type: string
+      eye_color:
+        type: string
+      gender:
+        type: string
+      hair_color:
+        type: string
+      height:
+        type: string
+      mass:
+        type: string
+      name:
+        type: string
+      skin_color:
+        type: string
+    type: object
   models.Characteristic:
     properties:
       titulo:
@@ -81,4 +100,19 @@ paths:
       summary: Get product by SKU
       tags:
       - Product
+  /starwars/people:
+    get:
+      consumes:
+      - application/json
+      description: Get all people from Star Wars API
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PeopleDto'
+      summary: Get all people
+      tags:
+      - StarWars
 swagger: "2.0"

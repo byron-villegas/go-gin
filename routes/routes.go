@@ -11,4 +11,7 @@ func SetupRoutes(routerGroup *gin.RouterGroup) {
 
 	routerGroup.GET("/products", productController.GetProducts)
 	routerGroup.GET("/products/:sku", productController.GetProductBySku)
+
+	starWarsController := controller.StarWarsController{}
+	routerGroup.GET("/starwars/people", starWarsController.GetPeople)
 }
