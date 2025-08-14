@@ -13,11 +13,13 @@ import (
 
 type Config struct {
 	ServerPath        string
-	ServerPort        string
+	ServerPort        int
 	SecretKey         string
 	JWTSecretKey      string
 	JWTAccessTokenExp int
 	CORSOrigin        string
+	Title             string
+	Version           string
 }
 
 var AppConfig *Config
@@ -38,11 +40,13 @@ func init() {
 	// Initialize the AppConfig struct
 	AppConfig = &Config{
 		ServerPath:        "/api",
-		ServerPort:        "8080",
+		ServerPort:        8080,
 		SecretKey:         os.Getenv("SECRET_KEY"),
 		JWTSecretKey:      os.Getenv("JWT_SECRET_KEY"),
 		JWTAccessTokenExp: 3600,
 		CORSOrigin:        corsOrigin,
+		Title:             "go-gin",
+		Version:           "1.0.0",
 	}
 }
 
@@ -55,12 +59,12 @@ func ShowBanner() {
 
 	// Replace the placeholders in the banner with the actual values
 	bannerLog := string(bannerFile)
-	bannerLog = strings.ReplaceAll(bannerLog, "package.name", "go-gin")
-	bannerLog = strings.ReplaceAll(bannerLog, "package.version", "1.0.0")
+	bannerLog = strings.ReplaceAll(bannerLog, "package.name", AppConfig.Title)
+	bannerLog = strings.ReplaceAll(bannerLog, "package.version", AppConfig.Version)
 	bannerLog = strings.ReplaceAll(bannerLog, "go.version", strings.Replace(runtime.Version(), "go", "", 1))
 	bannerLog = strings.ReplaceAll(bannerLog, "gin.version", gin.Version)
 	bannerLog = strings.ReplaceAll(bannerLog, "server.path", AppConfig.ServerPath)
-	bannerLog = strings.ReplaceAll(bannerLog, "server.port", AppConfig.ServerPort)
+	bannerLog = strings.ReplaceAll(bannerLog, "server.port", fmt.Sprintf("%d", AppConfig.ServerPort))
 
 	// Print the banner
 	fmt.Println(bannerLog)
