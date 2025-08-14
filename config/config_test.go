@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -23,7 +24,7 @@ func TestInit_AppConfigDefaults(t *testing.T) {
 	if AppConfig.ServerPath != "/api" {
 		t.Errorf("expected ServerPath '/api', got '%s'", AppConfig.ServerPath)
 	}
-	if AppConfig.ServerPort != "8080" {
+	if AppConfig.ServerPort != 8080 {
 		t.Errorf("expected ServerPort '8080', got '%s'", AppConfig.ServerPort)
 	}
 	if AppConfig.SecretKey != "" {
@@ -48,11 +49,13 @@ func TestInit_AppConfigWithEnv(t *testing.T) {
 	// Vuelve a inicializar AppConfig manualmente para el test
 	AppConfig = &Config{
 		ServerPath:        "/api",
-		ServerPort:        "8080",
+		ServerPort:        8080,
 		SecretKey:         os.Getenv("SECRET_KEY"),
 		JWTSecretKey:      os.Getenv("JWT_SECRET_KEY"),
 		JWTAccessTokenExp: 3600,
 		CORSOrigin:        os.Getenv("CORS_ORIGIN"),
+		Title:             "go-gin",
+		Version:           "1.0.0",
 	}
 
 	if AppConfig.SecretKey != "mysecret" {
@@ -63,6 +66,12 @@ func TestInit_AppConfigWithEnv(t *testing.T) {
 	}
 	if AppConfig.CORSOrigin != "http://localhost" {
 		t.Errorf("expected CORSOrigin 'http://localhost', got '%s'", AppConfig.CORSOrigin)
+	}
+	if AppConfig.Title != "go-gin" {
+		t.Errorf("expected Title 'go-gin', got '%s'", AppConfig.Title)
+	}
+	if AppConfig.Version != "1.0.0" {
+		t.Errorf("expected Version '1.0.0', got '%s'", AppConfig.Version)
 	}
 }
 
@@ -102,7 +111,7 @@ func TestShowBanner_PrintsBannerWithPlaceholders(t *testing.T) {
 	if !strings.Contains(output, AppConfig.ServerPath) {
 		t.Errorf("expected server path in banner, got: %s", output)
 	}
-	if !strings.Contains(output, AppConfig.ServerPort) {
+	if !strings.Contains(output, fmt.Sprintf("%d", AppConfig.ServerPort)) {
 		t.Errorf("expected server port in banner, got: %s", output)
 	}
 	if !strings.Contains(output, "Gin: "+gin.Version) {
