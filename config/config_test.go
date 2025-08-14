@@ -25,7 +25,7 @@ func TestInit_AppConfigDefaults(t *testing.T) {
 		t.Errorf("expected ServerPath '/api', got '%s'", AppConfig.ServerPath)
 	}
 	if AppConfig.ServerPort != 8080 {
-		t.Errorf("expected ServerPort '8080', got '%s'", AppConfig.ServerPort)
+		t.Errorf("expected ServerPort '8080', got '%d'", AppConfig.ServerPort)
 	}
 	if AppConfig.SecretKey != "" {
 		t.Errorf("expected SecretKey '', got '%s'", AppConfig.SecretKey)
